@@ -90,6 +90,15 @@ export function createActionURL(
       ? detectedProtocol
       : detectedProtocol + ":"
 
+    // GIONATA REMOVE
+    console.warn(
+      `createActionURL - x-forwarded-host: ${headers.get("x-forwarded-host")}`
+    )
+    console.warn(
+      `createActionURL - x-forwarded-proto: ${headers.get("x-forwarded-proto")}`
+    )
+    console.warn(`createActionURL - _protocol: ${_protocol}`)
+
     url = new URL(`${_protocol}//${detectedHost}`)
   }
 
