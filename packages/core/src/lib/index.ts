@@ -16,7 +16,6 @@ export async function AuthInternal(
   const { action, providerId, error, method } = request
 
   const csrfDisabled = authOptions.skipCSRFCheck === skipCSRFCheck
-
   const { options, cookies } = await init({
     authOptions,
     action,
@@ -28,7 +27,6 @@ export async function AuthInternal(
     isPost: method === "POST",
     csrfDisabled,
   })
-
   const sessionStore = new SessionStore(
     options.cookies.sessionToken,
     request.cookies,
@@ -67,9 +65,9 @@ export async function AuthInternal(
     const { csrfTokenVerified } = options
     switch (action) {
       case "callback":
-        if (options.provider.type === "credentials")
-          // Verified CSRF Token required for credentials providers only
-          validateCSRF(action, csrfTokenVerified)
+        // if (options.provider.type === "credentials") // MODIFIED BY TIZIANO
+        //   // Verified CSRF Token required for credentials providers only
+        //   validateCSRF(action, csrfTokenVerified)
         return await actions.callback(request, options, sessionStore, cookies)
       case "session":
         validateCSRF(action, csrfTokenVerified)
